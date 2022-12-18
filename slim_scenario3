@@ -1,0 +1,66 @@
+// set up a simple neutral simulation
+initialize() {
+	initializeMutationRate(1e-8);
+	
+	// m1 mutation type: neutral 
+	initializeMutationType("m1", 0.5, "f", 0.0); 
+	
+	// m1 mutation type: beneficial 
+	initializeMutationType("m2", 0.5, "f", 0.02);
+	
+	// g1 genomic element type: uses m1 for all mutations
+	initializeGenomicElementType("g1", m1, 1.0);
+	
+	// uniform chromosome of length 200 kb with uniform recombination
+	initializeGenomicElement(g1, 0, 200e3);
+	initializeRecombinationRate(1e-8);
+}
+
+// create a population of 10000 individuals
+1 early() {
+	sim.addSubpop("p1", 10000);
+}
+
+// add mutation m2 at generation 5000. initial beneficial mutation frequency is 0.1. beneficial mutation in the middle of the genomic element
+5000 late() {
+	target = sample(p1.genomes, 100);
+	 target.addNewDrawnMutation(m2, 200e3/2); 
+}
+
+// change mutation m2 selection coefficient to 0 for 50 generations between generation 5100 and 5150
+5100 late() {
+	m2muts = sim.mutationsOfType(m2);
+	for (index in seqAlong(m2muts))
+ 		m2muts[index].setSelectionCoeff(0.0);
+} 
+
+// change mutation m2 selection coefficient to -0.02 for 50 generations between generation 5150 and 5200
+5150 late() {
+	m2muts = sim.mutationsOfType(m2);
+	for (index in seqAlong(m2muts))
+ 		m2muts[index].setSelectionCoeff(-0.02);
+} 
+
+// output samples of 50 genomes periodically every 10 generations from generation 5000 to 5200
+5000 late() { p1.outputVCFSample(100, filePath = "./slim_s2/t_1.vcf"); }
+5010 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_10.vcf"); }
+5020 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_20.vcf"); }
+5030 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_30.vcf"); }
+5040 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_40.vcf"); }
+5050 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_50.vcf"); }
+5060 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_60.vcf"); }
+5070 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_70.vcf"); }
+5080 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_80.vcf"); }
+5090 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_90.vcf"); }
+5100 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_100.vcf"); }
+5110 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_110.vcf"); }
+5120 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_120.vcf"); }
+5130 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_130.vcf"); }
+5140 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_140.vcf"); }
+5150 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_150.vcf"); }
+5160 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_160.vcf"); }
+5170 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_170.vcf"); }
+5180 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_180.vcf"); }
+5190 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_190.vcf"); }
+5200 late() { p1.outputVCFSample(100,  filePath = "./slim_s2/t_200.vcf"); }
+
