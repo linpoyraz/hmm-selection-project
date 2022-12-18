@@ -357,7 +357,7 @@ for (i in 1:4){
   main_lab = paste("Selection Landscape at Generation", generation[i])
   plot = ggplot(data = to_plot, aes(x = pos, y = s, color = type)) + geom_point() + 
     theme_bw() + labs(x = "Position", y = "Inferred s", color = "", title = main_lab)
-  ggsave(filename = paste("./results/landscape_", generation[i], ".png", sep = ""))
+  ggsave(filename = paste("./results/multi_allele/landscape_", generation[i], ".png", sep = ""))
 }
 
 # 3D plot 
@@ -381,6 +381,6 @@ p = plot_ly(to_plot, x = ~x, y = ~y, z = ~z) %>% add_markers(size = 1, color = ~
                         yaxis = list(title = "time"),
                         zaxis = list(title = "selection coefficient")))
 
-export(p = p, file = "./results/3d.png")
+export(p = p, file = "./results/multi_allele/3d.png")
 
 
