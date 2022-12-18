@@ -1,10 +1,10 @@
 # hmm-selection-project
 
-To run single-allele data simulation and analyses run:
+For single-allele data simulation and analyses run:
 
 ` make single-allele`
 
-To run multi-allele data simulation and analyses run (takes ~3 hours for 4 cores):
+For multi-allele data simulation and analyses run (takes ~3 hours for 4 cores):
 
 ` make multi-allele`
 
